@@ -1,0 +1,65 @@
+﻿@model Filmy.ViewModels.MovieFormViewModel
+
+@{
+    ViewBag.Title = "MovieForm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (Model.Movie == null)
+{
+    <h2>New Movie</h2>
+}
+else
+{
+    <h2>Editing @Model.Movie.Name</h2>
+}
+
+@using (Html.BeginForm("Save", "Movies"))
+{
+    ///Movie Name
+    <div class="form-group">
+        @Html.LabelFor(m => m.Movie.Name)
+        @Html.TextBoxFor(m => m.Movie.Name, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Movie.Name)
+    </div>
+    ///Release date
+    DateTime releaseDate = DateTime.Now;
+
+    if(Model.Movie != null)
+    {
+        releaseDate = Model.Movie.ReleaseDate;
+    }
+    <div class="form-group">
+        @Html.LabelFor(m => m.Movie.ReleaseDate)
+        @Html.TextBoxFor(m => m.Movie.ReleaseDate, releaseDate.ToString("d MMM yyyy", new System.Globalization.CultureInfo("en-EN"))
+                                                    , new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Movie.ReleaseDate)
+    </div>
+    ///Genre
+    <div class="form-group">
+        @Html.LabelFor(m => m.Movie.Genre)
+        @Html.DropDownListFor(m => m.Movie.Genre, new SelectList(Model.AllGenres, "Id", "Name"), "Select A Genre",
+                                                                                   new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Movie.Genre)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Movie.NumberInStock)
+        @Html.TextBoxFor(m => m.Movie.NumberInStock, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Movie.NumberInStock)
+    </div>
+    if (Model.Movie == null || Model.Movie.Id == 0)
+    {
+        @Html.Hidden("Movie.Id", 0)
+    }
+    else
+    {
+        @Html.HiddenFor(m => m.Movie.Id)
+    }
+        @Html.AntiForgeryToken()
+    <button type="submit" class="btn btn-primary">Save</button>
+}
+
+@section scripts 
+{
+    @Scripts.Render("~/bundles/jqueryval")
+}

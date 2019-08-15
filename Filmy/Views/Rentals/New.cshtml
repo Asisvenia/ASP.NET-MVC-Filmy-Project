@@ -1,0 +1,33 @@
+﻿@{
+    ViewBag.Title = "New";
+}
+
+<h2>New Rental Form</h2>
+
+@using (Html.BeginForm("AddMovie", "Rentals"))
+{
+    <div class="form-group">
+        <label>Customer</label>
+        <input type="text" name="selectedCustomer" data-filmy-autocomplete="@Url.Action("Autocomplete")" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label>Movie</label>
+        <input type="text" name="selectedMovie" data-filmy-autocomplete="@Url.Action("AutocompleteForMovies")" class="form-control" />
+    </div>
+
+    <input type="submit" value="Submit" class="btn btn-primary" />
+}
+
+@section scripts
+{
+    @if (TempData["message"] != null)
+    {
+        <script type="text/javascript">
+        $(document).ready(function () {
+
+             bootbox.alert(@Html.Raw(Json.Encode(TempData["message"])));
+        });
+        </script>
+    }
+}

@@ -1,0 +1,68 @@
+﻿@model Filmy.Models.Customer
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    DateTime minDate = DateTime.MinValue;
+    var twoLetters = string.Empty;
+    twoLetters += Model.Name[0];
+    twoLetters += Model.Name[1];
+    twoLetters = twoLetters.ToUpper();
+
+    int customerId = Model.Id;
+}
+
+<style>
+    body {
+        background-color: #EDEDF4;
+    }
+</style>
+
+<h2 id="circled-name">@twoLetters</h2>
+<h2>@Model.Name</h2>
+@if (Model.Birthdate != minDate)
+{
+    <h4>@Html.Label(Model.Birthdate.ToString("d MMM yyyy"))</h4>
+}
+
+<div class="section-title">
+    <h2>Movies</h2>
+</div>
+<div class="row">
+@if (Model.MovieLibrary != null)
+{
+    foreach (var movie in Model.MovieLibrary)
+    {
+    <div class="column">
+        <div class="img-wrap" data-id="@movie.Id">
+            <img class="close" src="\Content\Images\close_btn.png" width="60" height="60" />
+            <img src="@movie.Image" width="310" height="384">
+        </div>
+    </div>
+    }
+}
+</div>
+
+@section Scripts
+{
+    <script>
+        $(document).ready(function () {
+            $('.img-wrap .close').on('click', function () {
+                var target = $(this).closest('.img-wrap').find('img');
+                var id = $(this).closest('.img-wrap').data('id');
+                target.fadeOut('200', function () {
+                    target.remove();
+                });
+            $.ajax({
+                url: '@Url.Action("DeleteMovie", "Customers")',
+                type: 'post',
+                cache: false,
+                async: true,
+                data: { id: id, customerId: @customerId },
+            });
+            });
+
+        });
+    </script>
+}

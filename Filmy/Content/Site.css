@@ -1,0 +1,140 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+h1, h2, h3, h4, h5 {
+    font-family: 'Cambria Math';
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+.field-validation-error {
+    color: red;
+}
+
+.input-validation-error {
+    border: 2px solid red;
+}
+
+.validation-summary-errors {
+    font-weight: 600;
+    color: red;
+}
+
+#home-title {
+    font-family: 'Lucida Console';
+    font-weight: 600;
+    text-align: center;
+    color: #005FA3;
+}
+
+.section-title {
+    text-align: center;
+    position: relative;
+    margin-bottom: 30px;
+    text-transform: uppercase;
+    z-index: 50;
+}
+
+.section-title:before {
+    content: "";
+    height: 1px;
+    width: 100%;
+    position: absolute;
+    left: 0;
+    top: 50%;
+    background: #000;
+    z-index: -1;
+}
+
+.section-title h2 {
+    background: #EBEBF1;
+    padding: 5px 20px 0;
+    font-size: 1.65em;
+    margin: 0;
+    font-family: Bahnschrift;
+    display: inline-block;
+    zoom: 1;
+    *display: inline;
+    vertical-align: top;
+    float: none !important;
+    letter-spacing: .05em;
+    line-height: 110%;
+}
+
+#circled-name {
+    width: 90px;
+    height: 90px;
+    border-radius: 250px;
+    font-size: 24px;
+    color: #fff;
+    line-height: 90px;
+    text-align: center;
+    background: #000;
+}
+
+.column {
+    float: left;
+    width: 33.33%;
+    padding: 5px;
+}
+
+/* Clear floats after image containers. */
+.row::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+.img-wrap {
+    position: relative;
+    display: inline-block;
+
+}
+
+.img-wrap .close {
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    z-index: 100;
+    background-color: #FFF;
+    padding: 5px 2px 2px;
+    color: #000;
+    font-weight: bold;
+    cursor: pointer;
+    opacity: .2;
+    text-align: center;
+    font-size: 22px;
+    line-height: 10px;
+    border-radius: 50%;
+}
+.img-wrap:hover .close {
+    opacity: 0.6;
+    transition: all .3s ease-in;
+    -webkit-transition: all .3s ease-in;
+}
+
+.img-wrap .close:hover {
+    opacity: 1;
+    transition: all .3s ease-in;
+    -webkit-transition: all .3s ease-in;
+}
